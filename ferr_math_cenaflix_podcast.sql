@@ -27,6 +27,8 @@ CREATE TABLE cnf_podcasts(
 ##########################################################
 
 INSERT INTO cnf_usuarios (nome, u_login, u_pswd, u_type) VALUES
-('usuario','usuario','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',1),
+('usuario','usuario','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',3),
 ('admin','admin','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',1),
-('operador','operador','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',1);
+('operador','operador','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',2);
+
+select * from cnf_usuarios;
