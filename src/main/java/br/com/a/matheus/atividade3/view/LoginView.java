@@ -5,6 +5,7 @@
 package br.com.a.matheus.atividade3.view;
 
 import br.com.a.matheus.atividade3.control.LoginControl;
+import br.com.a.matheus.atividade3.model.entitys.User;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -14,10 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class LoginView extends javax.swing.JFrame {
 
+    private final LoginControl LC;
+
     /**
      * Creates new form LoginView
      */
     public LoginView() {
+        LC = new LoginControl();
         initComponents();
     }
 
@@ -114,15 +118,19 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+
         char[] pswd = pswdTF.getPassword();
         String login = loginTF.getText();
-        if (LoginControl.verifyLogin(login, pswd)){
-            JOptionPane.showMessageDialog(this, "Sucesso ao logar!");
-            // TODO exibir mensagem com o nome do usuario e abrir tela ListView
+
+        if (LC.verifyLogin(login, pswd)) {
+            User u = LC.getConfirmedUser();
+            dispose();
+            new ListView(u).setVisible(true);
+            Arrays.fill(pswd, ' ');
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario ou senha invalidos!");
+            pswdTF.setText("");
         }
-        Arrays.fill(pswd, ' ');
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -28,11 +28,9 @@ public class UserDAO extends Dao<User>{
             q.setParameter("login", login);
             return (User) q.getSingleResult();
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Usuario invalid, verifique os dados e tente novamente");
+                JOptionPane.showMessageDialog(null, "Usuario invalido, verifique os dados e tente novamente");
                 System.out.println("Erro: " + e.getMessage());                       
         }
         return null;
-    }
-    
-    
+    } 
 }

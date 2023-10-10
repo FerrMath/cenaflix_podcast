@@ -4,6 +4,9 @@
  */
 package br.com.a.matheus.atividade3.view;
 
+import br.com.a.matheus.atividade3.model.entitys.User;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ma_fe
@@ -15,6 +18,29 @@ public class ListView extends javax.swing.JFrame {
      */
     public ListView() {
         initComponents();
+    }
+
+    ListView(User u) {
+        initComponents();
+        show_greeting(u);
+    }
+
+    private void show_greeting(User u) {
+        String name = u.getName();
+        String permission;
+        String msg;
+        switch (u.getType()) {
+            case 1 ->
+                permission = "Administrador";
+            case 2 ->
+                permission = "Operador";
+            case 3 ->
+                permission = "Usuário";
+            default ->
+                throw new AssertionError();
+        }
+        msg = "Olá " + name + ", sua permissão é de " + permission + ".\nSeja bem-vindo!";
+        JOptionPane.showMessageDialog(this, msg);
     }
 
     /**
