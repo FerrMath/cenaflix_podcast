@@ -5,13 +5,9 @@
 package br.com.a.matheus.atividade3.view;
 
 import br.com.a.matheus.atividade3.control.TableControl;
+import br.com.a.matheus.atividade3.model.Permission;
 import br.com.a.matheus.atividade3.model.entitys.User;
-import java.awt.event.InputMethodListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -19,14 +15,48 @@ import javax.swing.event.DocumentListener;
  */
 public class ListView extends javax.swing.JFrame {
     private final TableControl TC;
+    private final Permission PERMISSION;
     /**
      * Creates new form ListView
      */
     ListView(User u) {
         initComponents();
+        PERMISSION = setPermission(u);
         this.TC = new TableControl(this.table);
-        TC.startTable();
+        configDisplay();
         show_greeting(u);
+    }
+    
+    private void configDisplay(){
+        displayFunctionalities();
+        TC.startTable();
+    }
+    
+    private void displayFunctionalities(){
+        if(PERMISSION == Permission.ADMIN){
+            delBtn.setVisible(true);
+            addBtn.setVisible(true);
+        }
+        else if (PERMISSION == Permission.OPERATOR){
+            addBtn.setVisible(true);
+        }
+    }
+    
+    private Permission setPermission(User u){
+        int type = u.getType();
+        
+        switch (type) {
+            case 1 -> { 
+                return Permission.ADMIN;
+            }
+            case 2 -> {
+                return Permission.OPERATOR;
+            }
+            case 3 -> {
+                return Permission.USER;
+            }
+            default -> throw new AssertionError();
+        }
     }
 
     private void show_greeting(User u) {
@@ -72,7 +102,8 @@ public class ListView extends javax.swing.JFrame {
         filterTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        addBtn = new javax.swing.JToggleButton();
+        delBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,8 +132,11 @@ public class ListView extends javax.swing.JFrame {
         table.setRowHeight(30);
         jScrollPane1.setViewportView(table);
 
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jToggleButton1.setText("Cadastrar");
+        addBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addBtn.setText("Cadastrar");
+
+        delBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        delBtn.setText("Excluir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,9 +154,14 @@ public class ListView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,9 +178,14 @@ public class ListView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn)
+                    .addComponent(delBtn))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
+
+        addBtn.setVisible(false);
+        delBtn.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,13 +207,14 @@ public class ListView extends javax.swing.JFrame {
     }//GEN-LAST:event_filterTFKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton addBtn;
+    private javax.swing.JToggleButton delBtn;
     private javax.swing.JTextField filterTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
