@@ -5,9 +5,8 @@
 package br.com.a.matheus.atividade3.control;
 
 import br.com.a.matheus.atividade3.model.Login;
-import br.com.a.matheus.atividade3.model.UserDAO;
+import br.com.a.matheus.atividade3.model.UserDao;
 import br.com.a.matheus.atividade3.model.entitys.User;
-import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -15,11 +14,11 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class LoginControl {
     // TODO criar metodo de encerramento
-    private final UserDAO DAO;
+    private final UserDao DAO;
     private User authenticatedUser;
     
     public LoginControl() {
-        DAO = new UserDAO();
+        DAO = new UserDao();
     }
     
     // TODO dividir o codigo com uma nova classe (Login)

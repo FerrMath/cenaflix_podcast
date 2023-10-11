@@ -47,17 +47,17 @@
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
-                  <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jTextField1" min="-2" pref="260" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" alignment="0" min="-2" pref="646" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="646" max="32767" attributes="0"/>
                       <Component id="jToggleButton1" alignment="1" min="-2" pref="131" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,48 +113,19 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="table">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
-                    <Column editable="true" title="ID" type="java.lang.Object">
-                      <Data value="1"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Produtor" type="java.lang.Object">
-                      <Data value="teste"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Nome do Epis&#xf3;dio" type="java.lang.Object">
-                      <Data value="PodcastName"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="N&#xba; do Epis&#xf3;dio" type="java.lang.Object">
-                      <Data value="3"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Dura&#xe7;&#xe3;o" type="java.lang.Object">
-                      <Data value="43m"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="URL do Repo" type="java.lang.Object">
-                      <Data value="teste.de.url"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="true" title="ID" type="java.lang.Object"/>
+                    <Column editable="true" title="Produtor" type="java.lang.Object"/>
+                    <Column editable="true" title="Nome do Epis&#xf3;dio" type="java.lang.Object"/>
+                    <Column editable="true" title="N&#xba; do Epis&#xf3;dio" type="java.lang.Object"/>
+                    <Column editable="true" title="Dura&#xe7;&#xe3;o" type="java.lang.Object"/>
+                    <Column editable="true" title="URL do Repo" type="java.lang.Object"/>
                   </Table>
                 </Property>
+                <Property name="rowHeight" type="int" value="30"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -4,6 +4,7 @@
  */
 package br.com.a.matheus.atividade3.view;
 
+import br.com.a.matheus.atividade3.control.TableControl;
 import br.com.a.matheus.atividade3.model.entitys.User;
 import javax.swing.JOptionPane;
 
@@ -12,16 +13,14 @@ import javax.swing.JOptionPane;
  * @author ma_fe
  */
 public class ListView extends javax.swing.JFrame {
-
+    private final TableControl TC;
     /**
      * Creates new form ListView
      */
-    public ListView() {
-        initComponents();
-    }
-
     ListView(User u) {
         initComponents();
+        this.TC = new TableControl(this.table);
+        TC.startTable();
         show_greeting(u);
     }
 
@@ -58,7 +57,7 @@ public class ListView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,18 +70,16 @@ public class ListView extends javax.swing.JFrame {
 
         jLabel3.setText("Pesquisar podcast por produtor:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "teste", "PodcastName", "3", "43m", "teste.de.url"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Produtor", "Nome do Episódio", "Nº do Episódio", "Duração", "URL do Repo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        table.setRowHeight(30);
+        jScrollPane1.setViewportView(table);
 
         jToggleButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jToggleButton1.setText("Cadastrar");
@@ -104,9 +101,9 @@ public class ListView extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,8 +143,8 @@ public class ListView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

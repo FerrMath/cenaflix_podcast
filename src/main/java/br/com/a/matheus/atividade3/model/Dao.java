@@ -9,7 +9,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author ma_fe
@@ -26,14 +25,24 @@ public class Dao<E> {
             emf = Persistence.createEntityManagerFactory(unit);
             em = emf.createEntityManager();
             System.out.println("Sucesso");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao iniciar EntityManager.\n" + e.getMessage());
         }
     }
-    
-    public void close(){
+
+    public Dao<E> openT() {
+        em.getTransaction().begin();
+        return this;
+    }
+
+    public Dao<E> closeT() {
+        em.getTransaction().commit();
+        return this;
+    }
+
+    public void close() {
         em.close();
         emf.close();
     }

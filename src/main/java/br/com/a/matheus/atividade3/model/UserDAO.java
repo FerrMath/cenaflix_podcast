@@ -5,26 +5,26 @@
 package br.com.a.matheus.atividade3.model;
 
 import br.com.a.matheus.atividade3.model.entitys.User;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ma_fe
  */
-public class UserDAO extends Dao<User>{
+public class UserDao extends Dao<User>{
 
-    public UserDAO() {
+    public UserDao() {
         this("login-unit");
     }
     
-    public UserDAO(String unit){
+    public UserDao(String unit){
         super(User.class, unit);
     }
     
     public User getUserByLogin(String login){
         try {
-            Query q = em.createQuery("SELECT u FROM User u WHERE u.login = :login");
+            TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.login = :login", User.class);
             q.setParameter("login", login);
             return (User) q.getSingleResult();
         } catch (Exception e) {
