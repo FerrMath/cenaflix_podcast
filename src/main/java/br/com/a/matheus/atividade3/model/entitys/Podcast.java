@@ -40,6 +40,56 @@ public class Podcast {
 
     public Podcast() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getProductor() {
+        return productor;
+    }
+
+    public void setProductor(String productor) {
+        this.productor = productor;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getNumEp() {
+        return numEp;
+    }
+
+    public void setNumEp(int numEp) {
+        this.numEp = numEp;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getRepUrl() {
+        return repUrl;
+    }
+
+    public void setRepUrl(String repUrl) {
+        this.repUrl = repUrl;
+    }
+    
+    
     
     public String[] getData(){
         return new String[]{

@@ -24,7 +24,6 @@ public class Dao<E> {
             this.cls = cls;
             emf = Persistence.createEntityManagerFactory(unit);
             em = emf.createEntityManager();
-            System.out.println("Sucesso");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

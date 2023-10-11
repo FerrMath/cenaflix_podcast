@@ -6,7 +6,12 @@ package br.com.a.matheus.atividade3.view;
 
 import br.com.a.matheus.atividade3.control.TableControl;
 import br.com.a.matheus.atividade3.model.entitys.User;
+import java.awt.event.InputMethodListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -41,6 +46,15 @@ public class ListView extends javax.swing.JFrame {
         msg = "Olá " + name + ", sua permissão é de " + permission + ".\nSeja bem-vindo!";
         JOptionPane.showMessageDialog(this, msg);
     }
+    
+    private void atualizarFiltro(){
+        String filtro = filterTF.getText();
+        if (filtro.isEmpty() || filtro.isBlank()) {
+            TC.displayAll();
+        } else {
+            TC.filterResults(filtro);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +69,7 @@ public class ListView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        filterTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -69,6 +83,12 @@ public class ListView extends javax.swing.JFrame {
         jLabel2.setText("LISTAGEM");
 
         jLabel3.setText("Pesquisar podcast por produtor:");
+
+        filterTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterTFKeyReleased(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +120,7 @@ public class ListView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
@@ -115,7 +135,7 @@ public class ListView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -137,13 +157,18 @@ public class ListView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void filterTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterTFKeyReleased
+        atualizarFiltro();
+    }//GEN-LAST:event_filterTFKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField filterTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

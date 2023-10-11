@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class TableControl {
     private final JTable TABLE;
     private final PodcastDao DAO;
+    private ArrayList<Podcast> podcasts;
 
     public TableControl(JTable table) {
         this.TABLE = table;
@@ -25,10 +26,28 @@ public class TableControl {
     
     public void startTable(){
         DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
-        ArrayList<Podcast> podcasts = DAO.getAllPodcasts();
+        podcasts = DAO.getAllPodcasts();
         
         for (Podcast p: podcasts){
             model.addRow(p.getData());
+        }
+    }
+    
+    public void displayAll(){
+        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
+        model.setRowCount(0);
+        for (Podcast p: podcasts){
+                model.addRow(p.getData());
+        }
+    }
+    
+    public void filterResults(String filter){
+        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
+        model.setRowCount(0);
+        for (Podcast p: podcasts){
+            if(p.getProductor().toLowerCase().contains(filter.toLowerCase())){
+                model.addRow(p.getData());
+            }
         }
     }
 }

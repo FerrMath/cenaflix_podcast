@@ -32,5 +32,5 @@ public class UserDao extends Dao<User>{
                 System.out.println("Erro: " + e.getMessage());                       
         }
         return null;
-    } 
+    }
 }
