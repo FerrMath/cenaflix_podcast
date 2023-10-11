@@ -32,9 +32,9 @@ INSERT INTO cnf_usuarios (nome, u_login, u_pswd, u_type) VALUES
 ('operador','operador','$2a$10$txAydB2wDxjJNyNdpHwHluwyj6sK8aCLS9dYTss5qO0uBIw3iAosW',2);
 
 ##########################################################
-################### PODCASTS SETUP #########################
+################## PODCASTS SETUP ########################
 ##########################################################
 INSERT INTO cnf_podcasts (produtor, nome_ep, num_ep, duracao, rep_url) VALUES 
-('Fulano','Help, achando uma vaga como Dev JAVA', 1, 4000, 'matheus.a.teste3_url_rep'),
-('Siclano','Um dia sofrendo com JPA', 2, 3665, 'matheus.a.teste3_url_rep'),
+('Fulano','Help, achando uma vaga como Dev JAVA', 1, 4000, 'matheus.a.teste1_url_rep'),
+('Siclano','Um dia sofrendo com JPA', 2, 3665, 'matheus.a.teste2_url_rep'),
 ('Triclano','Como não amar a arte de build do JAVA', 3, 1650, 'matheus.a.teste3_url_rep');
