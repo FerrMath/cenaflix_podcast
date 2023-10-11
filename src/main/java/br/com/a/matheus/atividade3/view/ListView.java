@@ -14,8 +14,10 @@ import javax.swing.JOptionPane;
  * @author ma_fe
  */
 public class ListView extends javax.swing.JFrame {
+
     private final TableControl TC;
     private final Permission PERMISSION;
+
     /**
      * Creates new form ListView
      */
@@ -26,27 +28,26 @@ public class ListView extends javax.swing.JFrame {
         configDisplay();
         show_greeting(u);
     }
-    
-    private void configDisplay(){
+
+    private void configDisplay() {
         displayFunctionalities();
         TC.startTable();
     }
-    
-    private void displayFunctionalities(){
-        if(PERMISSION == Permission.ADMIN){
+
+    private void displayFunctionalities() {
+        if (PERMISSION == Permission.ADMIN) {
             delBtn.setVisible(true);
             addBtn.setVisible(true);
-        }
-        else if (PERMISSION == Permission.OPERATOR){
+        } else if (PERMISSION == Permission.OPERATOR) {
             addBtn.setVisible(true);
         }
     }
-    
-    private Permission setPermission(User u){
+
+    private Permission setPermission(User u) {
         int type = u.getType();
-        
+
         switch (type) {
-            case 1 -> { 
+            case 1 -> {
                 return Permission.ADMIN;
             }
             case 2 -> {
@@ -55,7 +56,8 @@ public class ListView extends javax.swing.JFrame {
             case 3 -> {
                 return Permission.USER;
             }
-            default -> throw new AssertionError();
+            default ->
+                throw new AssertionError();
         }
     }
 
@@ -76,13 +78,27 @@ public class ListView extends javax.swing.JFrame {
         msg = "Olá " + name + ", sua permissão é de " + permission + ".\nSeja bem-vindo!";
         JOptionPane.showMessageDialog(this, msg);
     }
-    
-    private void atualizarFiltro(){
+
+    private void atualizarFiltro() {
         String filtro = filterTF.getText();
         if (filtro.isEmpty() || filtro.isBlank()) {
             TC.displayAll();
         } else {
             TC.filterResults(filtro);
+        }
+    }
+
+    private void delete() {
+        if (table.getSelectedRow() > -1) {
+            int choice = JOptionPane.showConfirmDialog(this, "Continuar?", "Excluir podcast permanentemente", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                if (TC.deletEntry()) {
+                    TC.updateTable();
+                    JOptionPane.showMessageDialog(this, "Podcast excluido com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao excluir o podcast!");
+                }
+            }
         }
     }
 
@@ -137,6 +153,11 @@ public class ListView extends javax.swing.JFrame {
 
         delBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         delBtn.setText("Excluir");
+        delBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,6 +226,10 @@ public class ListView extends javax.swing.JFrame {
     private void filterTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterTFKeyReleased
         atualizarFiltro();
     }//GEN-LAST:event_filterTFKeyReleased
+
+    private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
+        delete();
+    }//GEN-LAST:event_delBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton addBtn;

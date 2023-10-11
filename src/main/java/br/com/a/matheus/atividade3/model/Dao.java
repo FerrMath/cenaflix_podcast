@@ -31,6 +31,16 @@ public class Dao<E> {
         }
     }
 
+    public Dao<E> removeAtomic(E entity) {
+        openT().remove(entity).closeT();
+        return this;
+    }
+
+    public Dao<E> remove(E entity) {
+        em.remove(entity);
+        return this;
+    }
+
     public Dao<E> openT() {
         em.getTransaction().begin();
         return this;

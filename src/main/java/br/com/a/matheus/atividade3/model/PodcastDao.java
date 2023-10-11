@@ -12,22 +12,32 @@ import java.util.ArrayList;
  *
  * @author ma_fe
  */
-public class PodcastDao extends Dao<Podcast>{
+public class PodcastDao extends Dao<Podcast> {
 
-    public PodcastDao(){
+    public PodcastDao() {
         this("table-unit");
     }
-    
+
     public PodcastDao(String unit) {
         super(Podcast.class, unit);
     }
-    
-    public ArrayList<Podcast> getAllPodcasts(){
+
+    public ArrayList<Podcast> getAllPodcasts() {
         ArrayList<Podcast> podcasts;
         String jpql = "SELECT p FROM Podcast p";
         TypedQuery<Podcast> query = em.createQuery(jpql, Podcast.class);
         podcasts = (ArrayList<Podcast>) query.getResultList();
         return podcasts;
     }
-    
+
+    public boolean removePodcast(Podcast p) {
+        Podcast result = em.find(Podcast.class, p.getId());
+        if (result != null) {
+            removeAtomic(p);
+            return true;
+        }
+
+        return false;
+    }
+
 }

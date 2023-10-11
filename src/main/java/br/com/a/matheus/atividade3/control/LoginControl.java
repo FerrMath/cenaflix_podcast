@@ -21,7 +21,6 @@ public class LoginControl {
         DAO = new UserDao();
     }
     
-    // TODO dividir o codigo com uma nova classe (Login)
     public boolean verifyLogin(String login, char[] pswd){
         User user = DAO.getUserByLogin(login);
         authenticatedUser = user;
