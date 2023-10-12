@@ -35,9 +35,19 @@ public class Dao<E> {
         openT().remove(entity).closeT();
         return this;
     }
+    
+    public Dao<E> insertAtomic(E entity){
+        openT().insert(entity).closeT();
+        return this;
+    }
 
     public Dao<E> remove(E entity) {
         em.remove(entity);
+        return this;
+    }
+    
+    public Dao<E> insert(E entity) {
+        em.persist(entity);
         return this;
     }
 
@@ -52,8 +62,12 @@ public class Dao<E> {
     }
 
     public void close() {
-        em.close();
-        emf.close();
+        if (em.isOpen()) {
+            em.close();
+        }
+        if (emf.isOpen()){
+            emf.close();
+        }
     }
 
 }

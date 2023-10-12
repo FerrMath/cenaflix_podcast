@@ -4,6 +4,7 @@
  */
 package br.com.a.matheus.atividade3.model.entitys;
 
+import br.com.a.matheus.atividade3.model.PodcastForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,14 @@ public class Podcast {
     private String repUrl;
 
     public Podcast() {
+    }
+    
+    public Podcast(PodcastForm f){
+        this.productor = f.getProductor();
+        this.title = f.getName();
+        this.numEp = f.getNumEp();
+        this.duration = f.getDuration();
+        this.repUrl = f.getUrl();
     }
 
     public int getId() {

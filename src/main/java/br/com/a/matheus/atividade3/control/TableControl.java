@@ -7,6 +7,7 @@ package br.com.a.matheus.atividade3.control;
 import br.com.a.matheus.atividade3.model.PodcastDao;
 import br.com.a.matheus.atividade3.model.entitys.Podcast;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,8 +63,11 @@ public class TableControl {
         int row = TABLE.getSelectedRow();
         Podcast p;
         if (row > -1) {
-            p = podcasts.get(row);
-            return DAO.removePodcast(p);
+            int choice = JOptionPane.showConfirmDialog(null,"Excluir podcast permanentemente?","Confirmar exclusão.", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                p = podcasts.get(row);
+                return DAO.removePodcast(p);
+            }
         }
         return false;
     }

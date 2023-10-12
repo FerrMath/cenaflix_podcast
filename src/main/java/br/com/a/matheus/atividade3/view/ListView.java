@@ -89,17 +89,16 @@ public class ListView extends javax.swing.JFrame {
     }
 
     private void delete() {
-        if (table.getSelectedRow() > -1) {
-            int choice = JOptionPane.showConfirmDialog(this, "Continuar?", "Excluir podcast permanentemente", JOptionPane.YES_NO_OPTION);
-            if (choice == JOptionPane.YES_OPTION) {
-                if (TC.deletEntry()) {
-                    TC.updateTable();
-                    JOptionPane.showMessageDialog(this, "Podcast excluido com sucesso!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao excluir o podcast!");
-                }
-            }
+        if (TC.deletEntry()) {
+            update();
+            JOptionPane.showMessageDialog(this, "Podcast excluido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir o podcast!");
         }
+    }
+
+    public void update() {
+        TC.updateTable();
     }
 
     /**
@@ -150,6 +149,11 @@ public class ListView extends javax.swing.JFrame {
 
         addBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         addBtn.setText("Cadastrar");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         delBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         delBtn.setText("Excluir");
@@ -230,6 +234,11 @@ public class ListView extends javax.swing.JFrame {
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
         delete();
     }//GEN-LAST:event_delBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        setVisible(false);
+        new AddFormView(this).setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton addBtn;

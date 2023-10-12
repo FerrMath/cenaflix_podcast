@@ -29,6 +29,17 @@ public class PodcastDao extends Dao<Podcast> {
         podcasts = (ArrayList<Podcast>) query.getResultList();
         return podcasts;
     }
+    
+    public boolean addPodcast(PodcastForm f){
+        Podcast p = new Podcast(f);
+        try {
+            insertAtomic(p);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir Podcast no banco de dados");
+            return false;
+        }
+    }
 
     public boolean removePodcast(Podcast p) {
         Podcast result = em.find(Podcast.class, p.getId());
