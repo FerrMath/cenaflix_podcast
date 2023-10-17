@@ -5,10 +5,12 @@
 package br.com.a.matheus.atividade3.model;
 
 /**
- *
+ * Class responsible to format the data received from the front end login form
+ * 
  * @author ma_fe
  */
 public class PodcastForm {
+
     private String productor, name, url;
     private int numEp;
     private int duration;
@@ -20,7 +22,7 @@ public class PodcastForm {
         this.setDurationFromStr(duration);
         this.setNumEpFromStr(numEp);
     }
-    
+
     public PodcastForm(String productor, String name, String url, int numEp, int duration) {
         this.productor = productor;
         this.name = name;
@@ -60,7 +62,7 @@ public class PodcastForm {
     public void setNumEp(int numEp) {
         this.numEp = numEp;
     }
-    
+
     private void setNumEpFromStr(String numEp) {
         this.numEp = Integer.parseInt(numEp);
     }
@@ -72,13 +74,9 @@ public class PodcastForm {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-    
-    private void setDurationFromStr(String duration){
+
+    private void setDurationFromStr(String duration) {
         int minutes = Integer.parseInt(duration);
         this.duration = minutes * 60;
     }
-    
-    
-    
-    
 }

@@ -9,7 +9,8 @@ import jakarta.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Class responsible to handle the login requests to the database
+ * 
  * @author ma_fe
  */
 public class UserDao extends Dao<User>{
@@ -22,6 +23,12 @@ public class UserDao extends Dao<User>{
         super(User.class, unit);
     }
     
+    /**
+     * Gets the user from the database
+     * 
+     * @param login the username received from the login form
+     * @return the User entity with login matching with the login input or Null in case of any error or no user found
+     */
     public User getUserByLogin(String login){
         try {
             TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.login = :login", User.class);

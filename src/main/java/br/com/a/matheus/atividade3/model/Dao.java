@@ -27,7 +27,8 @@ public class Dao<E> {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Erro ao iniciar EntityManager.\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao iniciar Acesso ao banco de dados. O programa será encerrado em seguida.\n" + e.getMessage());
+            System.exit(1);
         }
     }
 
@@ -62,6 +63,10 @@ public class Dao<E> {
     }
 
     public void close() {
+        if(em == null && this.emf == null){
+            return;
+        }
+        
         if (em.isOpen()) {
             em.close();
         }

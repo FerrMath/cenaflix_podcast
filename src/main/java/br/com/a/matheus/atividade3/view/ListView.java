@@ -5,8 +5,9 @@
 package br.com.a.matheus.atividade3.view;
 
 import br.com.a.matheus.atividade3.control.TableControl;
-import br.com.a.matheus.atividade3.model.Permission;
+import br.com.a.matheus.atividade3.model.enums.Permission;
 import br.com.a.matheus.atividade3.model.entitys.User;
+import br.com.a.matheus.atividade3.model.enums.DeletionCode;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +32,7 @@ public class ListView extends javax.swing.JFrame {
 
     private void configDisplay() {
         displayFunctionalities();
-        TC.startTable();
+        TC.displayAll();
     }
 
     private void displayFunctionalities() {
@@ -89,16 +90,26 @@ public class ListView extends javax.swing.JFrame {
     }
 
     private void delete() {
-        if (TC.deletEntry()) {
-            update();
-            JOptionPane.showMessageDialog(this, "Podcast excluido com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao excluir o podcast!");
+        DeletionCode result = TC.deletEntry();
+        
+        if (null != result) switch (result) {
+            case SUCCESS:
+                JOptionPane.showMessageDialog(null, "Podcast excluido com sucesso!");
+                update();
+                break;
+            case CANCELED:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case ERROR:
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o podcast!");
+                break;
+            default:
+                break;
         }
     }
 
     public void update() {
-        TC.updateTable();
+        TC.updateDisplay();
     }
 
     /**
@@ -121,6 +132,7 @@ public class ListView extends javax.swing.JFrame {
         delBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cenaflix");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("CENAFLIX");
@@ -143,7 +155,15 @@ public class ListView extends javax.swing.JFrame {
             new String [] {
                 "ID", "Produtor", "Nome do Episódio", "Nº do Episódio", "Duração", "URL do Repo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table.setRowHeight(30);
         jScrollPane1.setViewportView(table);
 
@@ -157,6 +177,8 @@ public class ListView extends javax.swing.JFrame {
 
         delBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         delBtn.setText("Excluir");
+        delBtn.setBorderPainted(false);
+        delBtn.setFocusPainted(false);
         delBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delBtnActionPerformed(evt);
@@ -179,9 +201,8 @@ public class ListView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                        .addComponent(filterTF))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,12 +222,12 @@ public class ListView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(filterTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(delBtn))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         addBtn.setVisible(false);

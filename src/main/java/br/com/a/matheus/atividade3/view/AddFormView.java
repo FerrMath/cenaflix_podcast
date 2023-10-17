@@ -20,6 +20,7 @@ public class AddFormView extends javax.swing.JFrame {
         MAIN = view;
         FC = new FormControl();
         initComponents();
+        getRootPane().setDefaultButton(addBtn);
     }
 
     @SuppressWarnings("unchecked")
@@ -43,6 +44,7 @@ public class AddFormView extends javax.swing.JFrame {
         listBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cenaflix cadastrar");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("CENAFLIX");
@@ -180,7 +182,6 @@ public class AddFormView extends javax.swing.JFrame {
         duration = durationTF.getText();
         url = urlTF.getText();
 
-        // TODO adicionar a logica de adicionar novo podcast
         if (FC.addNewPodcast(prod, name, numEp, duration, url)) {
             closeWindow();
             JOptionPane.showMessageDialog(MAIN, "Podcast adicionado com sucesso");

@@ -30,4 +30,8 @@ public class LoginControl {
     public User getConfirmedUser(){
         return authenticatedUser;
     }
+    
+    public void close(){
+        DAO.close();
+    }
 }

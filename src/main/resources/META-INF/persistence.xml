@@ -4,6 +4,7 @@
   version="3.0" 
   xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
   <persistence-unit name="login-unit">
+      <!--Unit used to handle the CRUD for the Users-->
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost/ferr_math_cenaflix_podcast" />
@@ -14,6 +15,7 @@
     </properties>
   </persistence-unit>
   <persistence-unit name="table-unit">
+      <!--Unit used to handle the CRUD for the Podcasts-->
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost/ferr_math_cenaflix_podcast" />

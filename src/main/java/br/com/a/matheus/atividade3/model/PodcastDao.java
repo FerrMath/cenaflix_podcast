@@ -5,11 +5,17 @@
 package br.com.a.matheus.atividade3.model;
 
 import br.com.a.matheus.atividade3.model.entitys.Podcast;
+import br.com.a.matheus.atividade3.model.enums.DeletionCode;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 
 /**
- *
+ * Class responsible to handle the Podcast requests to the database
+ * 
  * @author ma_fe
  */
 public class PodcastDao extends Dao<Podcast> {
@@ -30,6 +36,18 @@ public class PodcastDao extends Dao<Podcast> {
         return podcasts;
     }
     
+    public ArrayList<Podcast> getFilteredPodcasts(String filter){
+        CriteriaBuilder cBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Podcast> cQuery = cBuilder.createQuery(Podcast.class);
+        Root<Podcast> from = cQuery.from(Podcast.class);
+        cQuery.select(from);
+        cQuery.where(cBuilder.like(from.get("productor"), "%" + filter.toLowerCase() + "%"));
+        
+        ArrayList podcasts = (ArrayList) em.createQuery(cQuery).getResultList();
+        
+        return podcasts;
+    }
+    
     public boolean addPodcast(PodcastForm f){
         Podcast p = new Podcast(f);
         try {
@@ -41,14 +59,14 @@ public class PodcastDao extends Dao<Podcast> {
         }
     }
 
-    public boolean removePodcast(Podcast p) {
+    public DeletionCode removePodcast(Podcast p) {
         Podcast result = em.find(Podcast.class, p.getId());
         if (result != null) {
             removeAtomic(p);
-            return true;
+            return DeletionCode.SUCCESS;
         }
 
-        return false;
+        return DeletionCode.ERROR;
     }
 
 }

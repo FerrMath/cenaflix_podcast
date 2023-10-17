@@ -6,6 +6,7 @@ package br.com.a.matheus.atividade3.control;
 
 import br.com.a.matheus.atividade3.model.PodcastDao;
 import br.com.a.matheus.atividade3.model.entitys.Podcast;
+import br.com.a.matheus.atividade3.model.enums.DeletionCode;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -26,40 +27,18 @@ public class TableControl {
         this.DAO = new PodcastDao();
     }
 
-    public void startTable() {
-        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
-        podcasts = DAO.getAllPodcasts();
-
-        for (Podcast p : podcasts) {
-            model.addRow(p.getData());
-        }
-    }
-
-    public void updateTable() {
-        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
-        model.setRowCount(0);
-        startTable();
-    }
-
     public void displayAll() {
-        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
-        model.setRowCount(0);
-        for (Podcast p : podcasts) {
-            model.addRow(p.getData());
-        }
+        podcasts = DAO.getAllPodcasts();
+        updateDisplay();
     }
 
     public void filterResults(String filter) {
-        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
-        model.setRowCount(0);
-        for (Podcast p : podcasts) {
-            if (p.getProductor().toLowerCase().contains(filter.toLowerCase())) {
-                model.addRow(p.getData());
-            }
-        }
+        
+        podcasts = DAO.getFilteredPodcasts(filter);
+        updateDisplay();
     }
 
-    public boolean deletEntry() {
+    public DeletionCode deletEntry() {
         int row = TABLE.getSelectedRow();
         Podcast p;
         if (row > -1) {
@@ -67,8 +46,21 @@ public class TableControl {
             if (choice == JOptionPane.YES_OPTION) {
                 p = podcasts.get(row);
                 return DAO.removePodcast(p);
+            } else if (choice == JOptionPane.NO_OPTION) {
+                
+                return DeletionCode.CANCELED;
             }
         }
-        return false;
+        return null;
+    }
+    
+    public void updateDisplay(){
+        DefaultTableModel model = (DefaultTableModel) TABLE.getModel();
+        model.setRowCount(0);
+        if (podcasts != null){
+            for (Podcast p : podcasts) {
+                model.addRow(p.getData());     
+            }
+        }
     }
 }
